@@ -19,6 +19,21 @@ ODD = "odd"
 EVEN = "even"
 PRIME = "prime"
 
+def is_prime(num : int) -> bool:
+    if num == 1 :
+        return False
+    if num % 2 == 0:
+        return num == 2
+    dig = 3
+    while dig ** 2 <= num and num % dig != 0:
+        dig += 2
+    return dig ** 2 > num
+
+def is_even(num : int) -> bool:
+    return num%2 == 0
+
+def is_odd(num : int) -> bool:
+    return not is_even(num)
 
 def filter_numbers():
     """
