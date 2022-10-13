@@ -11,8 +11,7 @@ def power_numbers(*args):
     >>> power_numbers(1, 2, 5, 7)
     <<< [1, 4, 25, 49]
     """
-    list=[*args]
-    return [i**2 for i in list]
+    return [i**2 for i in args]
 
 
 # filter types
@@ -32,3 +31,4 @@ def filter_numbers():
     >>> filter_numbers([2, 3, 4, 5], EVEN)
     <<< [2, 4]
     """
+    pass
