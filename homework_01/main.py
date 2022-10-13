@@ -35,7 +35,7 @@ def is_even(num : int) -> bool:
 def is_odd(num : int) -> bool:
     return not is_even(num)
 
-def filter_numbers():
+def filter_numbers(numbers, filter_type):
     """
     функция, которая на вход принимает список из целых чисел,
     и возвращает только чётные/нечётные/простые числа
@@ -46,4 +46,15 @@ def filter_numbers():
     >>> filter_numbers([2, 3, 4, 5], EVEN)
     <<< [2, 4]
     """
-    pass
+
+    if filter_type == ODD :
+        return list(filter(is_odd, numbers))
+        #return [i for i in numbers if i % 2 == 1]
+    elif filter_type == EVEN :
+        return list(filter(is_even, numbers))
+        #return [i for i in numbers if i % 2 == 0]
+    elif filter_type == PRIME :
+        return list(filter(is_prime, numbers))
+        #return [i for i in numbers if is_prime(i) == True]
+    else :
+        pass
