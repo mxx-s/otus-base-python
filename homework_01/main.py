@@ -56,5 +56,4 @@ def filter_numbers(numbers, filter_type):
     elif filter_type == PRIME :
         return list(filter(is_prime, numbers))
         #return [i for i in numbers if is_prime(i) == True]
-    else :
-        pass
+
