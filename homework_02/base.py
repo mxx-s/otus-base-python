@@ -3,6 +3,9 @@ from homework_02 import exceptions
 
 
 class Vehicle(ABC):
+    weight : int
+    fuel : int
+    fuel_consumption : int
     started : bool = False
 
     def __init__(self, weight=5,  fuel=60, fuel_consumption=2):
