@@ -8,5 +8,5 @@ from homework_02.engine import Engine
 class Car(Vehicle):
     engine = None
 
-    def set_engine(self, engine : "Engine") :
+    def set_engine(self, engine : Engine) :
         self.engine = engine
