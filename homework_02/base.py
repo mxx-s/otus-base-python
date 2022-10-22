@@ -4,7 +4,7 @@ from homework_02 import exceptions
 
 class Vehicle(ABC):
 
-    def __init__(self, weight=5, started=True, fuel=60, fuel_consumption=2):
+    def __init__(self, weight=5, started=False, fuel=60, fuel_consumption=2):
         self.weight = weight
         self.started = started
         self.fuel = fuel
