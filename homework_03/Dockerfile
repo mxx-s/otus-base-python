@@ -16,5 +16,7 @@ COPY . .
 
 CMD uvicorn main:app --host 0.0.0.0
 
+# For build this file :
+# docker build . -t app
 # For run this file, use :
 # docker run -it -p 8000:8000 app
