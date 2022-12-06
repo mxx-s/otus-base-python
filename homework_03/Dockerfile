@@ -4,8 +4,8 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /var/app
 
-RUN pip install --upgrade pip & \
-    pip install pipenv==2022.11.25
+RUN pip install --upgrade pip
+RUN pip install pipenv==2022.11.25
 
 
 COPY Pipfile Pipfile.lock ./
