@@ -1,3 +1,6 @@
+import asyncio
+from jsonplaceholder_requests import (get_users, get_posts)
+
 """
 Домашнее задание №4
 Асинхронная работа с сетью и бд
@@ -15,11 +18,17 @@
 
 
 async def async_main():
-    pass
+    users_dict, post_dict = await asyncio.gather(get_users(), get_posts())
+    
+    for elem in users_dict:
+      print(elem.name, elem.username, elem.email)
+    
+    for elem in post_dict:
+      print(elem.__dict__)
 
 
 def main():
-    pass
+    asyncio.run(async_main())
 
 
 if __name__ == "__main__":
