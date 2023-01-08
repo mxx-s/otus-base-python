@@ -14,6 +14,8 @@ from sqlalchemy import (
                        Integer,
                        String,
                        Boolean,
+                       ForeignKey,
+                       Text,
 )
 """
 создайте асинхронный алхимичный engine
@@ -64,20 +66,38 @@ class IntPkMixin() :
 
 
 class User(IntPkMixin, Base) :
-# class User(Base) :
     name = Column(String(50), unique=True, nullable=False)
     username = Column(String(50), unique=True, nullable=False)
     email = Column(String(50), unique=True, nullable=False)
     is_staff = Column(Boolean, default=False, server_default="FALSE")
 
-    # author = relationship("Author", back_populates="user", uselist=False)
+    posts = relationship("Post", back_populates="user")
 
     def __str__(self)->str :
         return (f"{self.__class__.__name__}("
                 f"id={self.id},"
                 f"username={self.username!r},"
                 f"email={self.email!r},"
-                # f"is_staff={self.is_staff},"
-                # f"created_at={self.created_at},"
+                ")"
+        )
+
+class Post(IntPkMixin, Base) :
+    title = Column(String(200), nullable=False)
+    body = Column(Text, nullable=False, default="", server_default="")
+
+    user_id=Column( Integer
+                  , ForeignKey("users.id")
+                  , nullable=False
+                  , unique=False)
+
+    user = relationship("User", back_populates="posts", uselist=False)
+
+
+    def __str__(self)->str :
+        return (f"{self.__class__.__name__}("
+                f"id={self.id},"
+                f"title={self.title!r},"
+                f"author_id={self.author_id},"
+                f"created_at={self.created_at},"
                 ")"
         )
