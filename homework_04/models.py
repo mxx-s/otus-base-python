@@ -97,7 +97,6 @@ class Post(IntPkMixin, Base) :
         return (f"{self.__class__.__name__}("
                 f"id={self.id},"
                 f"title={self.title!r},"
-                f"author_id={self.author_id},"
-                f"created_at={self.created_at},"
+                f"body={self.body!r},"
                 ")"
         )
