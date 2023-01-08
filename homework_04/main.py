@@ -5,7 +5,7 @@ from models import (
     AsyncSession,
     async_engine,
     Base,
-    async_session,
+    Session,
     User,
     Post,
 )
@@ -71,7 +71,7 @@ async def async_main():
 
     users_dicts, post_dicts = await asyncio.gather(get_users(), get_posts())
     
-    async with async_session() as session:
+    async with Session() as session:
         for api_user in users_dicts:
             # print(api_user.name, api_user.username, api_user.email)
             await create_user(session=session,

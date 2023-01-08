@@ -38,7 +38,7 @@ async_engine: AsyncEngine = create_async_engine(
     echo=PG_DB_ECHO,
 )
 
-async_session = sessionmaker(
+Session = sessionmaker(
     async_engine,
     class_=AsyncSession,
     expire_on_commit=False,
