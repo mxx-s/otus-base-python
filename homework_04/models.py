@@ -31,7 +31,7 @@ import os
 
 PG_URI = "postgresql+pg8000://usr:qwerty@0.0.0.0:5432/homework4"
 PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://usr:qwerty@0.0.0.0:5432/homework4"
-PG_DB_ECHO = True
+PG_DB_ECHO = False
 
 async_engine: AsyncEngine = create_async_engine(
     url=PG_CONN_URI,
