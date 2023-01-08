@@ -14,6 +14,7 @@ POSTS_DATA_URL = "https://jsonplaceholder.typicode.com/posts"
 
 @dataclass
 class ApiUser :
+    id : int
     name: str
     username: str
     email: str
@@ -37,9 +38,9 @@ async def get_users() :
     done, pending = await asyncio.wait(tasks)
     result = []
     for item in done :
-        name, username, email = item.result().get('name'), item.result().get('username'), item.result().get('email')
+        id, name, username, email = item.result().get('id'), item.result().get('name'), item.result().get('username'), item.result().get('email')
         # result.append(asdict(ApiUser(name=name, username=username, email=email)))
-        result.append(ApiUser(name=name, username=username, email=email))
+        result.append(ApiUser(id=id, name=name, username=username, email=email))
         t_err = item.exception()
         if t_err :
             print("Something get wrong", t_err)

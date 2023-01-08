@@ -32,11 +32,12 @@ async def recreate_all_tables():
 
 
 async def create_user( session: AsyncSession,
+                       id: int,
                        name: str,
                        username: str,
                        email: str
                       ) -> User:
-    user = User(name=name, username=username, email=email)
+    user = User(id=id, name=name, username=username, email=email)
     session.add(user)
     await session.commit()
     print("User created: ", user)
@@ -75,6 +76,7 @@ async def async_main():
         for api_user in users_dicts:
             # print(api_user.name, api_user.username, api_user.email)
             await create_user(session=session,
+                              id=api_user.id,
                               name=api_user.name,
                               username=api_user.username,
                               email=api_user.email,
