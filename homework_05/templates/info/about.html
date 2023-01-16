@@ -1,0 +1,19 @@
+{% extends 'info/base.html' %}
+
+{% block title %}
+  About
+{% endblock %}
+
+{% block header %}
+   <h1> About </h1>
+{% endblock header %}
+
+{% block body %}
+  {% for prg in about_text: %}
+    <p> {{ prg }}</p>
+  {% endfor %}
+{% endblock %}
+
+{% block footer %}
+
+{% endblock footer %}
