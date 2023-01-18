@@ -1,4 +1,4 @@
-{% extends 'info/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
   About
@@ -9,9 +9,14 @@
 {% endblock header %}
 
 {% block body %}
-  {% for prg in about_text: %}
-    <p> {{ prg }}</p>
-  {% endfor %}
+  <div class="row align-items-center about-block">
+    <div class="col col-md-8 mx-auto align-self-center">
+    {% for prg in about_text: %}
+      <p> {{ prg }}</p>
+    {% endfor %}
+    </div>
+  </div>
+
 {% endblock %}
 
 {% block footer %}

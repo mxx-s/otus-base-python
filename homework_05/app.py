@@ -19,7 +19,7 @@ app = Flask(__name__)
 app.register_blueprint(info_app)
 
 
-@app.get("/")
+@app.get("/", endpoint="index_page")
 def get_root():
     return render_template("index.html")
 
