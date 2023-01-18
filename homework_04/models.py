@@ -1,22 +1,3 @@
-from sqlalchemy.ext.asyncio import (
-    AsyncEngine,
-    AsyncSession,
-    create_async_engine,
-)
-from sqlalchemy.orm import (
-                declarative_base, 
-                declared_attr,
-                sessionmaker,
-                relationship,
-)
-from sqlalchemy import ( 
-                       Column,
-                       Integer,
-                       String,
-                       Boolean,
-                       ForeignKey,
-                       Text,
-)
 """
 создайте асинхронный алхимичный engine
 добавьте declarative base (свяжите с engine)
@@ -27,10 +8,32 @@ from sqlalchemy import (
 создайте связи relationship между моделями: User.posts и Post.user
 """
 
+from sqlalchemy.ext.asyncio import (
+    AsyncEngine,
+    AsyncSession,
+    create_async_engine,
+)
+from sqlalchemy.orm import (
+    declarative_base,
+    declared_attr,
+    sessionmaker,
+    relationship,
+)
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Boolean,
+    ForeignKey,
+    Text,
+)
+
 import os
 
-PG_URI = "postgresql+pg8000://usr:qwerty@0.0.0.0:5432/homework4"
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://usr:qwerty@0.0.0.0:5432/homework4"
+PG_CONN_URI = (
+    os.environ.get("SQLALCHEMY_PG_CONN_URI")
+    or "postgresql+asyncpg://usr:qwerty@0.0.0.0:5432/homework4"
+)
 PG_DB_ECHO = False
 
 async_engine: AsyncEngine = create_async_engine(
@@ -44,10 +47,10 @@ Session = sessionmaker(
     expire_on_commit=False,
 )
 
-class Base :
 
+class Base:
     @declared_attr
-    def __tablename__(cls) :
+    def __tablename__(cls):
         """
         User -> users
         Author -> authors
@@ -57,15 +60,16 @@ class Base :
     def __repr__(self):
         return str(self)
 
+
 Base = declarative_base(bind=async_engine, cls=Base)
 # Session = None
 
 
-class IntPkMixin() :
+class IntPkMixin:
     id = Column(Integer, primary_key=True)
 
 
-class User(IntPkMixin, Base) :
+class User(IntPkMixin, Base):
     name = Column(String(50), unique=True, nullable=False)
     username = Column(String(50), unique=True, nullable=False)
     email = Column(String(50), unique=True, nullable=False)
@@ -73,30 +77,29 @@ class User(IntPkMixin, Base) :
 
     posts = relationship("Post", back_populates="user")
 
-    def __str__(self)->str :
-        return (f"{self.__class__.__name__}("
-                f"id={self.id},"
-                f"username={self.username!r},"
-                f"email={self.email!r},"
-                ")"
+    def __str__(self) -> str:
+        return (
+            f"{self.__class__.__name__}("
+            f"id={self.id},"
+            f"username={self.username!r},"
+            f"email={self.email!r},"
+            ")"
         )
 
-class Post(IntPkMixin, Base) :
+
+class Post(IntPkMixin, Base):
     title = Column(String(200), nullable=False)
     body = Column(Text, nullable=False, default="", server_default="")
 
-    user_id=Column( Integer
-                  , ForeignKey("users.id")
-                  , nullable=False
-                  , unique=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, unique=False)
 
     user = relationship("User", back_populates="posts", uselist=False)
 
-
-    def __str__(self)->str :
-        return (f"{self.__class__.__name__}("
-                f"id={self.id},"
-                f"title={self.title!r},"
-                f"body={self.body!r},"
-                ")"
+    def __str__(self) -> str:
+        return (
+            f"{self.__class__.__name__}("
+            f"id={self.id},"
+            f"title={self.title!r},"
+            f"body={self.body!r},"
+            ")"
         )
