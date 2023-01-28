@@ -1,0 +1,74 @@
+.custom-dropdown__button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: -3px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid white;
+  pointer-events: none;
+}
+.custom-dropdown {
+  position: relative;
+  margin: 25px 0;
+}
+.custom-dropdown__button {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  font-size: inherit;
+  box-shadow: 2px 2px 5px 0px #d2d2d2;
+  border: none;
+  border-radius: 2px;
+  background-color: #00b8ff;
+  color: white;
+  padding: 1em;
+  cursor: pointer;
+}
+.custom-dropdown__button:focus {
+  outline: 10px solid hotpink;
+}
+.custom-dropdown__list {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 100%;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 200;
+ /* Prettify */
+  background-color: lightskyblue;
+  color: black;
+  font-size: inherit;
+}
+.custom-dropdown__list.-expanded {
+  visibility: visible;
+  opacity: 1;
+}
+.custom-dropdown__list-option {
+  /* padding: 1em 3em 1em 1em; */
+  /* border: 1px solid black; */
+  cursor: pointer;
+}
+/* .custom-dropdown__list-option:not(:first-child) {
+  margin-top: -4px;
+} */
+.custom-dropdown__list-option:hover {
+  background-color: dodgerblue;
+}
+.custom-dropdown__list-option:active, .custom-dropdown__list-option:focus {
+  background-color: dodgerblue;
+  border: 1px solid black;
+
+}
+.custom-dropdown__list-option[disabled] {
+  /* background-color: lightgrey; */
+  /* color: black; */
+  cursor: not-allowed;
+  font-style: italic;
+}
+
+.custom-dropdown__list-option::marker{
+  list-style-type: lower-alpha;
+}
