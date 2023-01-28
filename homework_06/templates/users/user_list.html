@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% set createpath = url_for('user_app.users_list') %}
+{% set isExists = request.path == createpath %}
+
+
+{% block title %}
+  {% if isExists %}
+    Users
+  {% else %}
+    Removed users
+  {% endif %}
+{% endblock %}
+
+{% block header %}
+  {% if isExists %}
+    <h1> Users </h1>
+  {% else %}
+    <h1> Removed users </h1>
+  {% endif %}
+{% endblock header %}
+
+{% block body %}
+    {% if users %}
+      {% if isExists %}
+      <div class="row row-allign-items-center">
+          <a href="{{ url_for('user_app.add_user') }}" class="btn btn-outline-info mt-2 mx-1 ms-2 col"> Add </a>
+          <a href="{{ url_for('user_app.remove')}}" class="btn btn-outline-danger mt-2 mx-1 col"> Remove </a>
+      </div>
+      <div class="row row-allign-items-center">
+          <a href="{{ url_for('user_app.users_removed_list') }}" class="btn btn-outline-dark mt-2 mx-1 ms-2 col"> Removed list </a>
+      </div>
+      {% else %}
+      {% endif %}
+      <ul class="list-group list-users-mb-navbar mt-2">
+          {% for user in users %}
+          <li class="list-group-item">
+              {# <a class="text-decoration-none" 
+                  href="{{ url_for('users_app.details', user_id=user.id) }}">{{ user.name }}</a> #}
+                <div class="row allign-items-center ">
+                  <div class="col-4 text-break">{{ user.username }} </div>
+                  <div class="col text-break">{{ user.email }}</div>
+                  {% if not isExists %}
+                      <a href="{{ url_for('user_app.comeback_user', user_id=user.id) }}" class="col btn btn-outline-info"> Return </a>
+                  {% else %}
+                  {% endif %}
+                </div>
+          </li>
+          {% endfor %}
+      </ul>
+    {% else %}
+      <h2 class="text-center">No users yet</h2>
+      {% if isExists %}
+        <div class="row row-allign-items-center">
+          <a href="#" class="btn btn-outline-dark mx-auto my-1"> Add a first</a>
+        </div>
+        <div class="row row-allign-items-center">
+            <a href="{{ url_for('user_app.users_removed_list') }}" class="btn btn-outline-dark mx-auto my-1"> Removed list </a>
+        </div>
+      {% else %}
+        <div class="row row-allign-items-center">
+          <a href="{{ url_for('user_app.users_list') }}" class="btn btn-outline-dark"> Back to users </a>
+        </div>
+      {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+
+{% endblock footer %}

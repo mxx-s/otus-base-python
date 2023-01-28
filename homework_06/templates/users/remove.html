@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Remove user
+{% endblock title %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/rm.css') }}">
+{% endblock head %}
+
+{% block header %}
+    <div class="h1">Remove user</div>
+{% endblock header %}
+
+{% block body %}
+
+  {% if users %}
+      <div class="custom-dropdown">
+        <button id="custom-dropdown-button" class="custom-dropdown__button" aria-haspopup="listbox" title=" Select user from list ">
+          Select user from list
+        </button>
+        <ul id="custom-dropdown-options-list" class="custom-dropdown__list" role="listbox" aria-expanded="false">
+          <li class="custom-dropdown__list-option"id="placeholder-option disabled" disabled aria-disabled="true"  tabIndex="-1" role="option" aria-selected="false">
+            ID USERNAME
+          </li>
+        {% for user in users %}
+          <li class="custom-dropdown__list-option"id="placeholder-option"  tabIndex="-1" role="option" aria-selected="false" userid="{{user.id}}">
+            {{user.id}} {{user.username}}
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+      <div class="row row-cols-1 row-allign-items-center mx-auto">
+        {# <div class="row sm"> #}
+          <a href="#" class="btn btn-danger dn" id="remove-btn" selectedid="-1" basedhref="{{ url_for('user_app.remove')}}"> Remove user</a>
+        {# </div> #}
+      </div>
+  {% else %}
+    <div class="row row-allign-items-center">
+      <div class="h1 text-center ">No users yet</div>
+    </div>
+  {% endif %}
+
+{% endblock body %}
+
+{% block footer %}
+
+    <script src=" {{ url_for('static', filename='js/remove_listbutton.js') }}"></script>
+
+{% endblock footer %}

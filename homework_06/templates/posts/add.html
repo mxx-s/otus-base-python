@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% set createpath = url_for('posts_app.add_post') %}
+{% set iscreate = request.path == createpath %}
+{% if iscreate %}
+    {% set buttonText = 'Create'   %}
+{% else %}
+    {% set buttonText = 'Edit'   %}
+{% endif %}
+
+{% block title %}
+    {{buttonText}} post
+{% endblock title %}
+
+{% block head %}
+
+{% endblock head %}
+
+{% block header %}
+    <h1>{{buttonText}} post</h1>
+{% endblock header %}
+
+{% block body %}
+    <form method="post">
+        {{ form.hidden_tag() }}
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(size=20, class="form-control") }}
+
+        {{ form.body.label(class="form-label") }}
+        {{ form.body(class="form-control") }}
+
+        {{ form.user.label(class="form-label") }}
+        {{ form.user(class="form-control") }}
+
+        {% if form.title.errors %}
+            <ul class="errors alert alert-danger">
+                {% for error in form.title.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <button class="btn btn-outline-primary my-2" 
+                type="submit"> {{buttonText}} </button>
+        <a href="{{url_for('posts_app.posts_root')}}" class="btn btn-outline-primary">back</a>
+    </form>
+{% endblock body %}
+
+{% block footer %}
+
+{% endblock footer %}

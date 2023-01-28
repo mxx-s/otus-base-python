@@ -1,0 +1,116 @@
+
+
+  body {
+   
+  
+    background-color: white;
+  }
+  
+  /* * {
+    transition: all 1s ease 0s;
+  } */
+
+  .content-clock {
+    height: 90vh;
+    font-size: 10px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+}
+
+.clock {
+	padding: 0.5rem;
+
+	display: inline-flex;
+	gap: 1rem;
+	position: fixed;
+	top: 50%;
+	left: 50%; 
+  /* margin-right: -50%; */
+ 
+	background: #111;
+	border-radius: 0.75rem;
+	cursor: pointer;
+	scale: 75%; 
+
+	translate: -50% -50% 0px;
+	transition: scale 0.2 s cubic-bezier(1, 0, 0.8, 1.6) 0s;
+  max-width: 1120px;
+}
+
+.clock-timer {
+	padding: 1rem;
+	display: flex;
+	/* gap: 1rem; */
+	position: relative;
+	z-index: 2;
+	background: #BFDCF0;
+	border-radius: 0.5rem;
+  max-width: 100%;
+}
+
+.clock-border {
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #4158d0;
+	background-image: linear-gradient(
+		43deg,
+		#4158d0 0%,
+		#c850c0 46%,
+		#ffcc70 100%
+	);
+	animation: border-hue 10s ease 0s infinite normal both;
+  max-width: 100%;
+  
+}
+
+.time-sep {
+	font: 400 6rem Arial;
+	color: dodgerblue;
+	pointer-events: none;
+	/* padding: 2rem 0rem; */
+}
+
+.time-block {
+	display: flex;
+	gap: 0.5rem;
+	/* padding: 2rem; */
+	background: transparent;
+  font: 400 6rem "jetbrains mono", "monolisa", monospace;
+}
+
+.time-line {
+	height: 99px;
+  transition: all 1s ease 0s;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	translate: 0px 0px 0px;
+
+	color: dodgerblue;
+}
+
+.time-number {
+	font: 400 6rem "jetbrains mono", "monolisa", monospace;
+	opacity: 0.0;
+	scale: 75%;
+}
+
+.time-number.active {
+	opacity: 1;
+	scale: 100%;
+	transform-origin: center;
+}
+
+@keyframes border-hue {
+	0% {
+		filter: hue-rotate(0deg);
+	}
+	100% {
+		filter: hue-rotate(360deg);
+	}
+}

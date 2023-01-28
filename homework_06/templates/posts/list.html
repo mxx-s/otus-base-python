@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Posts
+{% endblock title %}
+
+{% block head %}
+
+{% endblock head %}
+
+{% block header %}
+    <h1>Posts</h1>
+{% endblock header %}
+
+{% block body %}
+    <a href="{{url_for('posts_app.add_post')}}" class="btn btn-warning my-2">Add post</a>
+    {% if posts %}
+        <ul class="list-group list-users-mb-navbar">
+        {% for post in posts %}
+            <li class="card"> 
+            <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample{{post.id}}" aria-expanded="false" aria-controls="multiCollapseExample{{post.id}}"><strong>{{post.username}}</strong>:{{post.title}}</button>
+                    <div class="collapse multi-collapse p-3" id="multiCollapseExample{{post.id}}">
+                        <p>{{post.body}}</p>
+                        <a href="{{url_for('posts_app.update', post_id=post.id)}}" class="btn btn-outline-dark">Edit</a>
+                        <a href="{{url_for('posts_app.delete', post_id=post.id)}}" class="btn btn-outline-danger">Remove</a>
+                    </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <div class="h1">No posts yet</div>
+    {% endif %}
+{% endblock body %}
+
+{% block footer %}
+
+{% endblock footer %}
