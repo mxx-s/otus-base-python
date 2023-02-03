@@ -1,0 +1,25 @@
+{% extends "root.html" %}
+
+{% block title %}
+     Posts
+{% endblock title %}
+
+{% block body %}
+<h1>Hello {{ user.username|default:"Stranger" }}</h1>
+<ul>
+{% for post in object_list %}
+    <li class="card">
+        <span>
+            <a class="h5 btn" href="{% url 'post' pk=post.pk%}">{{post.title}}</a>
+            <a class="btn btn-outline-primary" href="{% url 'post_update' pk=post.pk %}">Update</a>
+            <a class="btn btn-outline-danger" href="{% url 'post_delete' pk=post.pk %}">Delete</a>
+        </span>
+
+    </li>
+{% endfor %}
+<br>
+<br>
+<br>
+<a class="btn btn-primary" href="{% url 'post_create' %}">Create post</a>
+</ul>
+{% endblock body %} 

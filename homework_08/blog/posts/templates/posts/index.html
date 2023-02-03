@@ -1,0 +1,42 @@
+{% extends "root.html" %}
+{% load index_tags %}
+
+{% block title %}
+     This is root
+{% endblock title %}
+
+{% block body %}
+<h1>Hello {{ user.username }}</h1>
+
+
+<ul>
+    {% for post in posts %}
+        {# Поскольку запрос один, то он выводит много повторяющихся постов. #}
+        {# Этим шагом, мы вычисляем, есть ли у поста комменты (т.к. их наличие, результирующий набор постов размножает) #}
+        {# Если идентификатор поста с предыдущим не совпадает, значит у нас новый пост и его надо вывести #}
+        {% if PostId != post.id %}  
+            {# Тут мы смотрим на существование у предыдущего поста комментов. #}
+            {# Если комменты были, то закрываем список, если нет - ничего не делаем #}
+            {% if CommentExists %} 
+                </ul>
+                {% define False as CommentExists%}
+            {% endif %}
+            {# Запоминаем текущий идентификатор поста, и выводим пост #}
+            {% define post.id as PostId %} 
+            <li>{{post.title}}:{{post.body}} Author: {{ post.autor__name }}</li>
+            {# Проверяем, есть ли комменты у поста, если есть - открываем список для комментов #}
+            {% if post.comment__id is not None %}
+                <ul>
+                    <li>{{post.comment__body}}:{{post.comment__author__name}}</li>
+                    {% define True as CommentExists%}
+            {% else %}
+                    {% define False as CommentExists%}
+            {% endif %}
+        {% else %}
+            <li>{{post.comment__body}}:{{post.comment__author__name}}</li>
+            {{continue}}
+        {% endif %}
+    {% endfor %}
+</ul>
+
+{% endblock body %} 
