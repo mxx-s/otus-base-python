@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment
 from users.models import User
 
 # ModelForm, Form
@@ -22,3 +22,13 @@ class PostModelForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ("title", "body", "autor")
+
+
+class CommentModelForm(forms.ModelForm):
+    body=forms.CharField(label="Введите комментарий:", widget=forms.Textarea(attrs={"class":"form-control"}))
+    post=forms.ModelChoiceField(label='Номер поста', queryset=Post.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
+    author=forms.ModelChoiceField(label='Автор поста', queryset=User.objects.all(), widget=forms.Select(attrs={'class':'form-control'}))
+
+    class Meta:
+        model = Comment
+        fields = ('body', 'post', 'author')

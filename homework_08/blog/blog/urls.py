@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from posts.views import main_page, PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView
+from posts.views import main_page, PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, CommentCreateView
 from users.views import main_user_page
 
 
@@ -29,6 +29,7 @@ urlpatterns = [
     path('posts/create/', PostCreateView.as_view(), name='post_create'),
     path('posts/update/<int:pk>/', PostUpdateView.as_view(), name='post_update'),
     path('posts/delete/<int:pk>/', PostDeleteView.as_view(), name='post_delete'),
+    path('comments/create/', CommentCreateView.as_view(), name='comment_create'),
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
 ]

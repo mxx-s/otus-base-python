@@ -8,11 +8,10 @@ from django.views.generic import (
 )
 from django.urls import reverse_lazy
 
-from posts.models import Post
-from .forms import PostModelForm
+from posts.models import Post, Comment
+from .forms import PostModelForm, CommentModelForm
 
 # Create your views here.
-
 
 def main_page(request):
     posts = Post.objects.all().values(
@@ -25,14 +24,15 @@ def main_page(request):
         "comment__author__name",
     )
 
+    form = CommentCreateView.as_view()
+
     context = {
         "posts": posts,
+        "form": form,
     }
     return render(request, "posts/index.html", context=context)
 
-
 # CRUD - Post
-
 
 class PostListView(ListView):
     model = Post
@@ -58,4 +58,10 @@ class PostUpdateView(UpdateView):
 
 class PostDeleteView(DeleteView):
     model = Post
+    success_url = reverse_lazy("posts")
+
+class CommentCreateView(CreateView):
+    model = Comment
+    
+    form_class = CommentModelForm
     success_url = reverse_lazy("posts")
