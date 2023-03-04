@@ -1,0 +1,17 @@
+{% extends "root.html" %}
+
+{% block title %}
+     Posts
+{% endblock title %}
+
+{% block body %}
+<h1>Hello {{ user.username|default:"Stranger" }}</h1>
+<div class="card">
+<h1 class="card-body">{{object.title}}</h1>
+
+<p class="card-body">{{object.body}}</p>
+
+<h5 class="card-body">Author: {{object.autor.name}}</h5>
+</div>
+
+{% endblock body %} 

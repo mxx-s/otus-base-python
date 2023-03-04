@@ -1,0 +1,27 @@
+{% extends "root.html" %}
+
+{% block title %}
+    Posts
+{% endblock title %}
+
+{% block body %}
+<h1>Hello {{ user.username|default:"Stranger" }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {# {{form.as_p}} #}
+        {% for field in form %}
+            <div>{{field.label_tag}}</div>
+            <div>{{field}}</div>
+            {% if field.errors %}
+                {{field.errors}}
+            {% endif %}
+            <br>
+        {% endfor %}
+        {% if form.errors %}
+            {{form.errors}}
+        {% endif %}
+        <button type="submit">Save</button>
+    </form>
+
+{% endblock body %} 
