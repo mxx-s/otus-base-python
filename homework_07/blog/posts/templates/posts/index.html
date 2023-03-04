@@ -1,0 +1,16 @@
+{% extends "root.html" %}
+
+{% block title %}
+     This is root
+{% endblock title %}
+
+{% block body %}
+<h1>Hello {{ user.username }}</h1>
+
+<ul>
+{% for el in posts %}
+    <li>{{ el.title }}:{{ el.body }}</li>
+{% endfor %}
+</ul>
+
+{% endblock body %} 
